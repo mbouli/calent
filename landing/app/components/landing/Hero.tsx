@@ -46,13 +46,13 @@ export function Hero() {
       </Reveal>
 
       <Reveal delay={0.13}>
-        <Link
-          href="/"
+        <a
+          href="https://my.calent.xyz"
           className="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-semibold rounded-md transition-all hover:opacity-85 active:scale-[0.97] mb-3"
           style={{ backgroundColor: C.salmon, color: C.ink }}
         >
           Start now
-        </Link>
+        </a>
         <p className="text-xs mb-14" style={{ color: `${C.ink}59` }}>
           Currently in Beta
         </p>

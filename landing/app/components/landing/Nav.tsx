@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { C } from './theme'
 
@@ -16,13 +15,13 @@ export function Nav() {
       }}
     >
       <Image src="/calent_wordmark_black.png" alt="Calent" width={51} height={34} className="object-contain" priority />
-      <Link
-        href="#"
+      <a
+        href="https://my.calent.xyz"
         className="flex items-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-md transition-all hover:opacity-85 active:scale-[0.97]"
         style={{ backgroundColor: C.salmon, color: C.ink }}
       >
         Open Calent <ArrowRight size={12} />
-      </Link>
+      </a>
     </nav>
   )
 }
