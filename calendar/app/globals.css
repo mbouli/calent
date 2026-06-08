@@ -1,0 +1,314 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist);
+  --font-mono: var(--font-inter);
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+  --animate-shimmer-slide: shimmer-slide var(--speed) ease-in-out infinite alternate;
+  --animate-spin-around: spin-around calc(var(--speed) * 2) infinite linear;
+  @keyframes shimmer-slide {
+  to {
+    transform: translate(calc(100cqw - 100%), 0);
+    }
+  }
+  @keyframes spin-around {
+  0% {
+    transform: translateZ(0) rotate(0);
+    }
+  15%, 35% {
+    transform: translateZ(0) rotate(90deg);
+    }
+  65%, 85% {
+    transform: translateZ(0) rotate(270deg);
+    }
+  100% {
+    transform: translateZ(0) rotate(360deg);
+    }
+  }
+  --animate-gradient: gradient 8s linear infinite
+;
+  @keyframes gradient {
+  to {
+    background-position: var(--bg-size, 300%) 0;}}
+  --animate-ripple: ripple var(--duration,2s) ease calc(var(--i, 0)*.2s) infinite;
+  @keyframes ripple {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);}
+  50% {
+    transform: translate(-50%, -50%) scale(0.9);}}}
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  /* Dark gray canvas (not pure black), with layered elevation for surfaces. */
+  --background: oklch(0.245 0.004 270);
+  --foreground: oklch(0.96 0.003 270);
+  --card: oklch(0.285 0.004 270);
+  --card-foreground: oklch(0.96 0.003 270);
+  --popover: oklch(0.295 0.004 270);
+  --popover-foreground: oklch(0.96 0.003 270);
+  /* Brand salmon as the dark-mode primary/accent, with dark ink on top. */
+  --primary: oklch(0.72 0.16 25);
+  --primary-foreground: oklch(0.2 0.02 25);
+  --secondary: oklch(0.325 0.004 270);
+  --secondary-foreground: oklch(0.96 0.003 270);
+  --muted: oklch(0.325 0.004 270);
+  --muted-foreground: oklch(0.72 0.006 270);
+  --accent: oklch(0.355 0.005 270);
+  --accent-foreground: oklch(0.96 0.003 270);
+  --destructive: oklch(0.62 0.21 25);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.72 0.16 25);
+  --chart-1: oklch(0.72 0.16 25);
+  --chart-2: oklch(0.65 0.22 295);
+  --chart-3: oklch(0.63 0.22 142);
+  --chart-4: oklch(0.72 0.18 55);
+  --chart-5: oklch(0.65 0.22 25);
+  --sidebar: oklch(0.265 0.004 270);
+  --sidebar-foreground: oklch(0.96 0.003 270);
+  --sidebar-primary: oklch(0.72 0.16 25);
+  --sidebar-primary-foreground: oklch(0.2 0.02 25);
+  --sidebar-accent: oklch(0.355 0.005 270);
+  --sidebar-accent-foreground: oklch(0.96 0.003 270);
+  --sidebar-border: oklch(1 0 0 / 12%);
+  --sidebar-ring: oklch(0.72 0.16 25);
+}
+
+/* ─── Named themes ─────────────────────────────────────────────────────────────
+   Light pastel themes (mint / lavender / pink / butter): white cards float over a
+   soft tinted canvas, with the pastel's deeper sibling as the accent. */
+
+:root[data-theme="mint"] {
+  --background: #eaf8f1;
+  --foreground: #14201b;
+  --card: #ffffff;
+  --card-foreground: #14201b;
+  --popover: #ffffff;
+  --popover-foreground: #14201b;
+  --primary: #2fb783;
+  --primary-foreground: #ffffff;
+  --secondary: #d7efe3;
+  --secondary-foreground: #1d3a2e;
+  --muted: #d9f0e5;
+  --muted-foreground: #5d7d6e;
+  --accent: #ccead9;
+  --accent-foreground: #1d3a2e;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: #cbe8d9;
+  --input: #cbe8d9;
+  --ring: #2fb783;
+  --sidebar: #e1f4eb;
+  --sidebar-foreground: #14201b;
+  --sidebar-primary: #2fb783;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ccead9;
+  --sidebar-accent-foreground: #1d3a2e;
+  --sidebar-border: #cbe8d9;
+  --sidebar-ring: #2fb783;
+}
+
+:root[data-theme="lavender"] {
+  --background: #f1eefb;
+  --foreground: #1b1830;
+  --card: #ffffff;
+  --card-foreground: #1b1830;
+  --popover: #ffffff;
+  --popover-foreground: #1b1830;
+  --primary: #7c6cf0;
+  --primary-foreground: #ffffff;
+  --secondary: #e4ddfb;
+  --secondary-foreground: #322a55;
+  --muted: #e6dffb;
+  --muted-foreground: #6b6388;
+  --accent: #ded5fa;
+  --accent-foreground: #322a55;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: #dcd2f6;
+  --input: #dcd2f6;
+  --ring: #7c6cf0;
+  --sidebar: #ece7fa;
+  --sidebar-foreground: #1b1830;
+  --sidebar-primary: #7c6cf0;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ded5fa;
+  --sidebar-accent-foreground: #322a55;
+  --sidebar-border: #dcd2f6;
+  --sidebar-ring: #7c6cf0;
+}
+
+:root[data-theme="pink"] {
+  --background: #fceffd;
+  --foreground: #2a1828;
+  --card: #ffffff;
+  --card-foreground: #2a1828;
+  --popover: #ffffff;
+  --popover-foreground: #2a1828;
+  --primary: #dd66c4;
+  --primary-foreground: #ffffff;
+  --secondary: #f7ddf9;
+  --secondary-foreground: #4d2c47;
+  --muted: #f8e0fa;
+  --muted-foreground: #875b80;
+  --accent: #f3d4f5;
+  --accent-foreground: #4d2c47;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: #f0d0f2;
+  --input: #f0d0f2;
+  --ring: #dd66c4;
+  --sidebar: #fae8fb;
+  --sidebar-foreground: #2a1828;
+  --sidebar-primary: #dd66c4;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f3d4f5;
+  --sidebar-accent-foreground: #4d2c47;
+  --sidebar-border: #f0d0f2;
+  --sidebar-ring: #dd66c4;
+}
+
+:root[data-theme="butter"] {
+  --background: #fffbe6;
+  --foreground: #2c2710;
+  --card: #ffffff;
+  --card-foreground: #2c2710;
+  --popover: #ffffff;
+  --popover-foreground: #2c2710;
+  --primary: #e0a92e;
+  --primary-foreground: #2a2410;
+  --secondary: #fbf1bf;
+  --secondary-foreground: #4a4017;
+  --muted: #fcf2c2;
+  --muted-foreground: #837a4d;
+  --accent: #f6ebab;
+  --accent-foreground: #4a4017;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: #f1e6a4;
+  --input: #f1e6a4;
+  --ring: #e0a92e;
+  --sidebar: #fefadd;
+  --sidebar-foreground: #2c2710;
+  --sidebar-primary: #e0a92e;
+  --sidebar-primary-foreground: #2a2410;
+  --sidebar-accent: #f6ebab;
+  --sidebar-accent-foreground: #4a4017;
+  --sidebar-border: #f1e6a4;
+  --sidebar-ring: #e0a92e;
+}
+
+/* War Eagle — Auburn homage: navy canvas, burnt-orange accents. Listed AFTER
+   .dark so it wins (both selectors match while .dark is toggled on). */
+:root[data-theme="war-eagle"] {
+  --background: #0c2340;
+  --foreground: #eaf0f8;
+  --card: #112e52;
+  --card-foreground: #eaf0f8;
+  --popover: #14335a;
+  --popover-foreground: #eaf0f8;
+  --primary: #e87722;
+  --primary-foreground: #0c2340;
+  --secondary: #163660;
+  --secondary-foreground: #eaf0f8;
+  --muted: #163660;
+  --muted-foreground: #9fb3ce;
+  --accent: #1b3e6e;
+  --accent-foreground: #eaf0f8;
+  --destructive: oklch(0.62 0.21 25);
+  --border: oklch(1 0 0 / 14%);
+  --input: oklch(1 0 0 / 16%);
+  --ring: #e87722;
+  --sidebar: #0e2848;
+  --sidebar-foreground: #eaf0f8;
+  --sidebar-primary: #e87722;
+  --sidebar-primary-foreground: #0c2340;
+  --sidebar-accent: #1b3e6e;
+  --sidebar-accent-foreground: #eaf0f8;
+  --sidebar-border: oklch(1 0 0 / 14%);
+  --sidebar-ring: #e87722;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
