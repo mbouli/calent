@@ -11,7 +11,9 @@ import { EventModal } from './components/EventModal'
 import { DeleteRecurringModal } from './components/DeleteRecurringModal'
 import { MobileNav } from './components/MobileNav'
 import { SettingsModal } from './components/SettingsModal'
+import { OnboardingTour } from './components/OnboardingTour'
 import { DashboardLoader } from './components/DashboardLoader'
+import { shouldShowTour } from './lib/onboarding'
 import { useCalendarStore } from './hooks/useCalendarStore'
 import { useSettingsStore } from './hooks/useSettingsStore'
 import { useCoursesStore } from './hooks/useCoursesStore'
@@ -109,8 +111,26 @@ export default function HomePage() {
   const stickiesStore = useStickiesStore()
 
   const { settings, loading: settingsLoading, updateSettings } = useSettingsStore()
-  const [modal, setModal] = useState<ModalState>({ open: false })
+
   const [settingsOpen, setSettingsOpen] = useState(false)
+
+  // First-run onboarding tour: open once when settings have loaded and the
+  // account has not been onboarded. A ref guards against re-opening after we
+  // flip `onboarded` true on completion.
+  const [tourOpen, setTourOpen] = useState(false)
+  const tourTriggered = useRef(false)
+  useEffect(() => {
+    if (!tourTriggered.current && shouldShowTour(settingsLoading, settings.onboarded)) {
+      tourTriggered.current = true
+      setTourOpen(true)
+    }
+  }, [settingsLoading, settings.onboarded])
+  const completeTour = () => {
+    setTourOpen(false)
+    updateSettings({ onboarded: true })
+  }
+
+  const [modal, setModal] = useState<ModalState>({ open: false })
   const [appMode, setAppMode] = useState<'calendar' | 'list'>('calendar')
   const [settingsTab, setSettingsTab] = useState<'preferences' | 'customization' | 'account' | 'courses'>('preferences')
   const [spotlightOpen, setSpotlightOpen] = useState(false)
@@ -356,6 +376,8 @@ export default function HomePage() {
           openCreate(now, new Date(now.getTime() + 60 * 60 * 1000))
         }}
       />
+
+      <OnboardingTour open={tourOpen} onComplete={completeTour} />
 
       <SettingsModal
         open={settingsOpen}
