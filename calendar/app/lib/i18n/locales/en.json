@@ -1,4 +1,26 @@
 {
+  "onboarding": {
+    "skip": "Skip",
+    "next": "Next",
+    "back": "Back",
+    "getStarted": "Get started",
+    "welcome": {
+      "title": "Welcome to Calent 👋",
+      "body": "Your schedule, simplified. Here's a quick tour."
+    },
+    "plan": {
+      "title": "Plan in a tap",
+      "body": "Tap any time slot to add an event — switch between week, month, and agenda views."
+    },
+    "stayOnTop": {
+      "title": "Stay on top",
+      "body": "Organize events with labels and keep your deadlines in view."
+    },
+    "makeItYours": {
+      "title": "Make it yours",
+      "body": "Switch themes, jot sticky notes, and jump anywhere with search."
+    }
+  },
   "common": {
     "cancel": "Cancel",
     "save": "Save",

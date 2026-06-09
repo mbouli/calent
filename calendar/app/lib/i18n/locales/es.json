@@ -1,4 +1,26 @@
 {
+  "onboarding": {
+    "skip": "Saltar",
+    "next": "Siguiente",
+    "back": "Atrás",
+    "getStarted": "Empezar",
+    "welcome": {
+      "title": "Bienvenido a Calent 👋",
+      "body": "Tu agenda, simplificada. Aquí tienes un recorrido rápido."
+    },
+    "plan": {
+      "title": "Planea con un toque",
+      "body": "Toca cualquier franja para añadir un evento — cambia entre vista semanal, mensual y agenda."
+    },
+    "stayOnTop": {
+      "title": "Mantén el control",
+      "body": "Organiza eventos con etiquetas y ten tus fechas límite a la vista."
+    },
+    "makeItYours": {
+      "title": "Hazlo tuyo",
+      "body": "Cambia de tema, anota notas adhesivas y salta a cualquier lugar con la búsqueda."
+    }
+  },
   "common": {
     "cancel": "Cancelar",
     "save": "Guardar",
