@@ -32,6 +32,16 @@ export default async function proxy(request: NextRequest) {
 
   const path = request.nextUrl.pathname
 
+  // DEV-ONLY: with TESTING=true, auto-login instead of gating on the login page.
+  // Double-guarded (never production) so it can't disable auth on the live app.
+  const testMode =
+    process.env.NODE_ENV !== 'production' && process.env.TESTING === 'true'
+  if (testMode && !user && path !== '/api/test-login') {
+    const url = new URL('/api/test-login', request.nextUrl)
+    url.searchParams.set('next', path)
+    return NextResponse.redirect(url)
+  }
+
   if (!user && path === '/') {
     return NextResponse.redirect(new URL('/login', request.nextUrl))
   }

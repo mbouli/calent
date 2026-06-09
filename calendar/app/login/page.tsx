@@ -173,9 +173,9 @@ export default function LoginPage() {
           <Image
             src="/calent_wordmark_black.png"
             alt="Calent"
-            width={45}
-            height={30}
-            className="object-contain"
+            width={132}
+            height={48}
+            className="w-[45px] h-auto"
             style={{ opacity: 0.6 }}
           />
         </Link>

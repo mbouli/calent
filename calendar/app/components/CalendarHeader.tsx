@@ -62,16 +62,16 @@ export function CalendarHeader({
       <Image
         src="/calent_wordmark_black.png"
         alt="Calent"
-        width={63}
-        height={42}
-        className="object-contain dark:hidden"
+        width={132}
+        height={48}
+        className="w-[63px] h-auto dark:hidden"
       />
       <Image
         src="/calent_wordmark_white.png"
         alt="Calent"
-        width={63}
-        height={42}
-        className="object-contain hidden dark:block"
+        width={132}
+        height={48}
+        className="w-[63px] h-auto hidden dark:block"
       />
 
       {/* Date navigation — absolutely centered */}

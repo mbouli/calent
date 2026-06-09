@@ -37,7 +37,7 @@ export default function NotFound() {
         }}
       >
         <Link href="/">
-          <Image src="/calent_wordmark_black.png" alt="Calent" width={51} height={34} className="object-contain" priority />
+          <Image src="/calent_wordmark_black.png" alt="Calent" width={132} height={48} className="w-[51px] h-auto" priority />
         </Link>
         <Link
           href="/"

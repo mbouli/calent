@@ -8,7 +8,7 @@ export function Footer() {
       className="flex flex-col md:flex-row items-center justify-between gap-3 px-6 md:px-16 py-6"
       style={{ borderTop: `1px solid ${C.ink}0d` }}
     >
-      <Image src="/calent_wordmark_black.png" alt="Calent" width={42} height={28} className="object-contain opacity-35" />
+      <Image src="/calent_wordmark_black.png" alt="Calent" width={132} height={48} className="w-[42px] h-auto opacity-35" />
       <div className="flex items-center gap-4">
         <Link
           href="/privacy"

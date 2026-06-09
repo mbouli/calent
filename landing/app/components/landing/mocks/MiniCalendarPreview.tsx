@@ -37,7 +37,7 @@ export function MiniCalendarPreview() {
       style={{ background: '#fff', border: `1px solid ${C.ink}12`, boxShadow: `0 16px 60px rgba(13,13,13,0.10), 0 2px 8px rgba(13,13,13,0.04)`, fontFamily: 'var(--font-geist)' }}>
 
       <div className="flex items-center justify-between px-3 h-10" style={{ borderBottom: `1px solid ${C.ink}0e` }}>
-        <Image src="/calent_wordmark_black.png" alt="Calent" width={36} height={24} className="object-contain opacity-80" />
+        <Image src="/calent_wordmark_black.png" alt="Calent" width={132} height={48} className="w-[36px] h-auto opacity-80" />
         <div className="flex items-center gap-1">
           <ChevronLeft size={12} color="#bbb" />
           <span style={{ fontSize: 10, color: '#888', fontWeight: 500 }}>{month}</span>

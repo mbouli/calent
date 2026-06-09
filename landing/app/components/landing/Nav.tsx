@@ -14,7 +14,7 @@ export function Nav() {
         borderBottom: `1px solid ${C.ink}0d`,
       }}
     >
-      <Image src="/calent_wordmark_black.png" alt="Calent" width={51} height={34} className="object-contain" priority />
+      <Image src="/calent_wordmark_black.png" alt="Calent" width={132} height={48} className="w-[51px] h-auto" priority />
       <a
         href="https://my.calent.xyz"
         className="flex items-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-md transition-all hover:opacity-85 active:scale-[0.97]"
