@@ -190,7 +190,7 @@ const THEME_LABEL_KEY: Record<PresetTheme, string> = {
 function ThemeSwatch({ bg, accent, ink }: { bg: string; accent: string; ink: string }) {
   return (
     <div
-      className="h-11 rounded-lg border border-black/10 flex items-center gap-1 px-2"
+      className="aspect-square sm:aspect-auto sm:h-11 rounded-lg border border-black/10 flex items-center gap-1 px-2"
       style={{ background: bg }}
     >
       <span className="h-1.5 flex-1 rounded-full" style={{ background: ink, opacity: 0.22 }} />
@@ -251,7 +251,7 @@ function CustomizationSection({ settings, onUpdate }: {
       <SectionLabel>{t('settings.appearance')}</SectionLabel>
       <p className="text-sm font-medium text-foreground mb-3">{t('settings.theme')}</p>
 
-      <div className="grid grid-cols-3 gap-2.5">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
         {PRESET_THEMES.map(id => {
           const p = THEME_PREVIEW[id]
           return (
@@ -580,7 +580,7 @@ export function SettingsModal({ open, settings, onUpdateSettings, onClose, cours
   return (
     <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
       <DialogContent showCloseButton={false} className="p-0 sm:max-w-[600px] overflow-hidden">
-        <div className="flex h-[480px] overflow-hidden">
+        <div className="flex h-[85dvh] sm:h-[480px] overflow-hidden">
           {/* Sidebar */}
           <aside className="w-[168px] shrink-0 bg-muted/80 border-r border-border/40 flex flex-col">
             <div className="px-4 pt-4 pb-3 flex items-center justify-between">
