@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence, useReducedMotion, type Variants } from 'motion/react'
 import { ArrowLeft } from 'lucide-react'
-import { Dialog, DialogContent } from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog'
 import { useT } from '../lib/i18n/useT'
 
 const SALMON = '#FF7264'
@@ -35,11 +35,12 @@ function Chip({ children, bg = '#fff', color = '#0D0D0D' }: {
 // ---- per-slide illustrations ----
 
 function ArtWelcome() {
+  const reduce = useReducedMotion()
   return (
     <motion.div
       initial={{ y: 6, opacity: 0 }}
-      animate={{ y: [6, -4, 6], opacity: 1 }}
-      transition={{ y: { duration: 3, repeat: Infinity, ease: 'easeInOut' }, opacity: { duration: 0.4 } }}
+      animate={reduce ? { y: 0, opacity: 1 } : { y: [6, -4, 6], opacity: 1 }}
+      transition={reduce ? { duration: 0.4 } : { y: { duration: 3, repeat: Infinity, ease: 'easeInOut' }, opacity: { duration: 0.4 } }}
       className="flex items-center justify-center"
     >
       <Image src="/calent_icon.png" alt="" width={132} height={132} className="w-[58px] h-auto" />
@@ -151,12 +152,12 @@ export function OnboardingTour({ open, onComplete }: { open: boolean; onComplete
           <div aria-live="polite" className="min-h-[64px]">
             <AnimatePresence mode="wait" custom={dir}>
               <motion.div key={slide.id} custom={dir} variants={variants} initial="enter" animate="center" exit="exit" transition={transition}>
-                <h2 className="text-[17px] font-bold mb-1.5" style={{ color: '#0D0D0D' }}>
+                <DialogTitle className="text-[17px] font-bold mb-1.5" style={{ color: '#0D0D0D' }}>
                   {t(`onboarding.${slide.id}.title`)}
-                </h2>
-                <p className="text-[13px] leading-relaxed" style={{ color: 'rgba(13,13,13,0.55)' }}>
+                </DialogTitle>
+                <DialogDescription className="text-[13px] leading-relaxed" style={{ color: 'rgba(13,13,13,0.55)' }}>
                   {t(`onboarding.${slide.id}.body`)}
-                </p>
+                </DialogDescription>
               </motion.div>
             </AnimatePresence>
           </div>
