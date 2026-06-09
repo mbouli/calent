@@ -14,6 +14,7 @@ export interface Settings {
   timezone: string
   startWeekMonday: boolean
   hour24: boolean
+  onboarded: boolean
 }
 
 const DEFAULT_SETTINGS: Settings = {
@@ -22,6 +23,8 @@ const DEFAULT_SETTINGS: Settings = {
   timezone: typeof Intl !== 'undefined' ? Intl.DateTimeFormat().resolvedOptions().timeZone : 'UTC',
   startWeekMonday: true,
   hour24: true,
+  // Default true so the tour never shows unless the DB row explicitly says false.
+  onboarded: true,
 }
 
 export function useSettingsStore() {
@@ -39,7 +42,7 @@ export function useSettingsStore() {
     })
     supabase
       .from('settings')
-      .select('theme, language, timezone, start_week_monday, hour_24')
+      .select('theme, language, timezone, start_week_monday, hour_24, onboarded')
       .maybeSingle()
       .then(({ data }) => {
         if (data) {
@@ -49,6 +52,7 @@ export function useSettingsStore() {
             timezone: data.timezone,
             startWeekMonday: data.start_week_monday,
             hour24: data.hour_24,
+            onboarded: data.onboarded ?? true,
           })
         }
         setLoading(false)
@@ -68,6 +72,7 @@ export function useSettingsStore() {
     if (updates.timezone !== undefined) row.timezone = updates.timezone
     if (updates.startWeekMonday !== undefined) row.start_week_monday = updates.startWeekMonday
     if (updates.hour24 !== undefined) row.hour_24 = updates.hour24
+    if (updates.onboarded !== undefined) row.onboarded = updates.onboarded
     if (Object.keys(row).length === 0) return
 
     const persist = async () => {

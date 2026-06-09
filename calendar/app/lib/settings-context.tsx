@@ -11,6 +11,7 @@ const DEFAULTS: Settings = {
   timezone: typeof Intl !== 'undefined' ? Intl.DateTimeFormat().resolvedOptions().timeZone : 'UTC',
   startWeekMonday: true,
   hour24: true,
+  onboarded: true,
 }
 
 const SettingsContext = createContext<Settings>(DEFAULTS)
