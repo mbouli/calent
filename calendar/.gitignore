@@ -43,3 +43,6 @@ next-env.d.ts
 
 # Brainstorm visual companion
 .superpowers/
+
+# Planning docs (kept locally, not tracked)
+docs/
