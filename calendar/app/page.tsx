@@ -21,7 +21,7 @@ import { useStickiesStore } from './hooks/useStickiesStore'
 import { DeadlinePanel } from './components/DeadlinePanel'
 import { SpotlightBar } from './components/SpotlightBar'
 import { CalendarEvent, RecurrenceType, RecurrenceRule } from './types'
-import { startOfWeek, addDays, addMonths } from './lib/dateUtils'
+import { startOfWeek, addDays, addMonths, isSameMonth } from './lib/dateUtils'
 import { generateCustomOccurrences } from './lib/recurrence'
 import { SettingsProvider } from './lib/settings-context'
 import { translate } from './lib/i18n'
@@ -129,6 +129,18 @@ export default function HomePage() {
     setTourOpen(false)
     updateSettings({ onboarded: true })
   }
+
+  // Mobile month view selects a day in-place (no navigation). We track the user's
+  // tapped day and derive the effective selection: the tapped day when it's in the
+  // visible month, otherwise today (if in view) or the 1st. Derived rather than an
+  // effect so it always tracks the current month without cascading renders.
+  const [tappedDay, setTappedDay] = useState<Date | null>(null)
+  const monthSelectedDay =
+    tappedDay && isSameMonth(tappedDay, currentDate)
+      ? tappedDay
+      : isSameMonth(new Date(), currentDate)
+      ? new Date()
+      : new Date(currentDate.getFullYear(), currentDate.getMonth(), 1)
 
   const [modal, setModal] = useState<ModalState>({ open: false })
   const [appMode, setAppMode] = useState<'calendar' | 'list'>('calendar')
@@ -345,8 +357,10 @@ export default function HomePage() {
         ) : viewMode === 'month' ? (
           <MonthView
             currentDate={currentDate}
+            selectedDay={monthSelectedDay}
             events={events}
             onDayClick={handleMonthDayClick}
+            onSelectDay={setTappedDay}
             onEventClick={openEdit}
             courses={courses}
           />
@@ -372,8 +386,16 @@ export default function HomePage() {
         onAppModeChange={handleAppModeChange}
         onViewModeChange={handleViewModeChange}
         onCreateEvent={() => {
+          // Base the new event on the selected day: in month view that's the day
+          // the user tapped (monthSelectedDay); otherwise the focused date. Keep
+          // the current time-of-day with a 1-hour default duration.
+          const base = viewMode === 'month' ? monthSelectedDay : currentDate
           const now = new Date()
-          openCreate(now, new Date(now.getTime() + 60 * 60 * 1000))
+          const start = new Date(
+            base.getFullYear(), base.getMonth(), base.getDate(),
+            now.getHours(), now.getMinutes(), 0, 0,
+          )
+          openCreate(start, new Date(start.getTime() + 60 * 60 * 1000))
         }}
       />
 

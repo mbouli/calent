@@ -28,13 +28,15 @@ const EVENT_BAR: Record<EventColor, string> = {
 
 interface MonthViewProps {
   currentDate: Date
+  selectedDay: Date
   events: CalendarEvent[]
   onDayClick: (date: Date) => void
+  onSelectDay: (date: Date) => void
   onEventClick: (event: CalendarEvent) => void
   courses: Course[]
 }
 
-export function MonthView({ currentDate, events, onDayClick, onEventClick, courses }: MonthViewProps) {
+export function MonthView({ currentDate, selectedDay, events, onDayClick, onSelectDay, onEventClick, courses }: MonthViewProps) {
   const { startWeekMonday, hour24, timezone } = useAppSettings()
   const { t, locale } = useT()
   const weekdays = weekdayLabels(locale, startWeekMonday, 'short')
@@ -42,7 +44,6 @@ export function MonthView({ currentDate, events, onDayClick, onEventClick, cours
   const today = toZoned(new Date(), timezone)
 
   const [isMobile, setIsMobile] = useState(false)
-  const [selectedDay, setSelectedDay] = useState<Date>(today)
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768)
@@ -50,15 +51,6 @@ export function MonthView({ currentDate, events, onDayClick, onEventClick, cours
     window.addEventListener('resize', check)
     return () => window.removeEventListener('resize', check)
   }, [])
-
-  // When month changes, reset selected day to today (if in view) or 1st of month
-  useEffect(() => {
-    if (isSameMonth(today, currentDate)) {
-      setSelectedDay(today)
-    } else {
-      setSelectedDay(new Date(currentDate.getFullYear(), currentDate.getMonth(), 1))
-    }
-  }, [currentDate]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const weeks: (Date | null)[][] = []
   for (let i = 0; i < grid.length; i += 7) weeks.push(grid.slice(i, i + 7))
@@ -72,7 +64,7 @@ export function MonthView({ currentDate, events, onDayClick, onEventClick, cours
 
   const handleDayClick = (day: Date) => {
     if (isMobile) {
-      setSelectedDay(day)
+      onSelectDay(day)
     } else {
       onDayClick(day)
     }
