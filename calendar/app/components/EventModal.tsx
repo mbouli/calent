@@ -273,7 +273,10 @@ export function EventModal({ open, event, defaultStart, defaultEnd, defaultTitle
     }
   }, [open, event, defaultStart, defaultEnd, defaultTitle, timezone])
 
-  const valid = title.trim().length > 0
+  // Deadlines only have a single time; events need end strictly after start.
+  // Times are zero-padded "HH:MM" so a string compare equals a time compare.
+  const timeValid = type === 'deadline' || endStr > startStr
+  const valid = title.trim().length > 0 && timeValid
 
   const handleSave = () => {
     if (!valid) return
@@ -361,6 +364,9 @@ export function EventModal({ open, event, defaultStart, defaultEnd, defaultTitle
                     <span className="text-muted-foreground/40 text-xs">→</span>
                     <TimeDropdown value={endStr} onChange={setEndStr} />
                   </div>
+                  {!timeValid && (
+                    <p className="text-[11px] text-rose-400 mt-1.5">{t('event.endBeforeStart')}</p>
+                  )}
                 </>
               ) : (
                 <>

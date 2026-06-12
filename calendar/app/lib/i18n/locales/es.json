@@ -71,6 +71,7 @@
     "date": "Fecha",
     "time": "Hora",
     "dueAt": "Vence a las",
+    "endBeforeStart": "La hora de fin debe ser posterior a la de inicio",
     "color": "Color",
     "setByLabel": "Asignar por etiqueta",
     "label": "Etiqueta",
