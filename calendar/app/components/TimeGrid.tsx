@@ -171,9 +171,9 @@ export function TimeGrid({
               {days.map((day, i) => (
                 <div
                   key={i}
-                  className="flex-1 flex items-center justify-center border-l border-border/30"
+                  className="flex-1 min-w-0 flex items-center justify-center border-l border-border/30"
                 >
-                  <div className="flex items-center gap-1.5">
+                  <div className="flex flex-col items-center gap-0.5 md:flex-row md:gap-1.5">
                     <span className={cn(
                       'text-sm',
                       isToday(day) ? 'text-muted-foreground' : 'text-muted-foreground/60'
