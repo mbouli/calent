@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'motion/react'
 import { Search } from 'lucide-react'
 import { parseEvent, ParsedEvent } from '../lib/parseEvent'
 import { CalendarEvent, EventColor } from '../types'

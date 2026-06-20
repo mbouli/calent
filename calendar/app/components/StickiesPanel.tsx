@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { Plus } from 'lucide-react'
-import { motion, LayoutGroup } from 'framer-motion'
+import { motion, LayoutGroup } from 'motion/react'
 import { cn } from '@/lib/utils'
 import { Sticky, StickyItem, EventColor } from '../types'
 import { StickyCard } from './StickyCard'
