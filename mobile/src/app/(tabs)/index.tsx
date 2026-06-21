@@ -25,7 +25,9 @@ import {
   weekdayLabels,
 } from '@/domain/dateUtils';
 import { CalendarEvent } from '@/domain/types';
+import { OnboardingTour } from '@/components/OnboardingTour';
 import { useEvents } from '@/hooks/useEvents';
+import { useOnboarding } from '@/hooks/useOnboarding';
 import { EVENT_PALETTE, Palette } from '@/theme/palette';
 import { Fonts } from '@/theme/typography';
 
@@ -42,6 +44,7 @@ function dayKey(d: Date): string {
 export default function CalendarScreen() {
   const router = useRouter();
   const { events, courses, loading, refresh } = useEvents();
+  const { showTour, completeTour } = useOnboarding();
   const [month, setMonth] = useState(() => new Date());
   const [selected, setSelected] = useState(() => new Date());
 
@@ -86,11 +89,11 @@ export default function CalendarScreen() {
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
-      {/* Header: Calent wordmark · centered month nav · settings gear */}
+      {/* Header: Calent icon · centered month nav · settings gear */}
       <View style={styles.header}>
         <Image
-          source={require('../../../assets/images/calent-wordmark.png')}
-          style={styles.brandWordmark}
+          source={require('../../../assets/images/calent-splash.png')}
+          style={styles.brandIcon}
           resizeMode="contain"
         />
         <View style={styles.monthNav} pointerEvents="box-none">
@@ -183,6 +186,8 @@ export default function CalendarScreen() {
           ))
         )}
       </ScrollView>
+
+      <OnboardingTour open={showTour} onComplete={completeTour} />
     </SafeAreaView>
   );
 }
@@ -228,7 +233,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     height: 48,
   },
-  brandWordmark: { width: 84, height: 30 },
+  brandIcon: { width: 30, height: 30 },
   monthNav: {
     position: 'absolute',
     left: 0,
